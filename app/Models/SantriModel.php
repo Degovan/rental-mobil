@@ -40,4 +40,15 @@ class SantriModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function findOrFail($id)
+	{
+		$santri = $this->find($id);
+
+		if (!$santri) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		} else {
+			return $santri;
+		}
+	}
 }

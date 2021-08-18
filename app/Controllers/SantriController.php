@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\SantriModel;
+use Irsyadulibad\DataTables\DataTables;
 
 class SantriController extends BaseController
 {
@@ -42,5 +43,22 @@ class SantriController extends BaseController
 		}
 
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+	}
+
+	public function datatable()
+	{
+		return DataTables::use('santri')
+			->addColumn('action', function ($santri) {
+				return view('pages/santri/action_dt', compact('santri'));
+			})
+			->rawColumns(['action'])
+			->make();
+	}
+
+	public function destroy($id)
+	{
+		$santri = model(SantriModel::class)->findOrFail($id);
+		model(SantriModel::class)->delete($id);
+		return redirect()->back()->with('message', 'Berhasil mengapus data santri');
 	}
 }

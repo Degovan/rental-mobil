@@ -9,6 +9,9 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false">
                         <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Data Mobil</span></a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('order') ?>" aria-expanded="false"><i class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Order</span></a>
+                </li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="me-3 fa fa-users"></i><span class="hide-menu">Data Santri </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="<?= route_to('santri') ?>" class="sidebar-link"><i class="me-3 fa fa-list"></i> Daftar</a></li>

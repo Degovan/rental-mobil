@@ -15,9 +15,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <!-- Custom CSS -->
     <link href="/assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="/css/style.min.css" rel="stylesheet">
-
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 </head>
 
 <body>
@@ -48,9 +56,11 @@
 
     <?= $this->include('layout/footer') ?>
 
-    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/js/app-style-switcher.js"></script>
+    <script src="../assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/app-style-switcher.js"></script>
     <!--Wave Effects -->
     <script src="/js/waves.js"></script>
     <!--Menu sidebar -->
@@ -59,9 +69,9 @@
     <script src="/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--flot chart-->
-    <script src="/assets/plugins/flot/jquery.flot.js"></script>
-    <script src="/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="/js/pages/dashboards/dashboard1.js"></script>
+    <!--    <script src="public/assets/plugins/flot/jquery.flot.js"></script>
+    <script src="public/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="public/js/pages/dashboards/dashboard1.js"></script> -->
 </body>
 
 </html>

@@ -12,22 +12,23 @@
         content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>Monster Lite Template by WrapPixel</title>
-    <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" />
+    <!-- <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" /> -->
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= echo base_url();?>assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <!-- Custom CSS -->
-    <link href="<?= echo base_url();?>assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?= echo base_url();?>css/style.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
 
 </head>
 
 <body>
     
-    <?= $this->extend('layout/header') ?>
-    <?= $this->extend('layout/navbar') ?>
-    <?= $this->renderSection('content') ?>
-   <?= $this->extend('layout/footer') ?>
+  <?= $this->include('layout/navbar') ?>
+    <?= $this->include('layout/sidebar') ?>
+        <?= $this->renderSection('content') ?>
+   <?= $this->include('layout/footer') ?>
+   
     <script src="../assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

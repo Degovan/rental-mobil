@@ -6,10 +6,7 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('dashboard');
-	}
-	public function order()
-	{
-		return view('pages/order/index');
+		$data['thumb'] = 'Dashboard';
+		echo view('dashboard', $data);
 	}
 }

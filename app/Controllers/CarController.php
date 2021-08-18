@@ -8,7 +8,10 @@ class CarController extends BaseController
 {
 	public function index()
 	{
-		$data['thumb'] = 'Data Mobil';
+		$data = [
+			'title' => 'Mobil',
+			'header' => 'Mobil'
+		];
 		echo view('admin/cars/index', $data);
 	}
 }

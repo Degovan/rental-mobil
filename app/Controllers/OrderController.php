@@ -8,7 +8,10 @@ class OrderController extends BaseController
 {
 	public function index()
 	{
-		$data['thumb'] = 'Orders';
+		$data = [
+			'title' => 'Order',
+			'header' => 'Order'
+		];
 		return view('admin/orders/index', $data);
 	}
 }

@@ -14,7 +14,7 @@
                                     class="hide-menu">Data Mobil</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="table-basic.html" aria-expanded="false"><i class="me-3 fa fa-table"
+                                href="<?= base_url('order') ?>" aria-expanded="false"><i class="me-3 fa fa-table"
                                     aria-hidden="true"></i><span class="hide-menu">Order</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"

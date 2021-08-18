@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // Auto redirect to login page when user is not authenticated
 $routes->group('', ['filter' => 'login'], function ($routes) {
 	$routes->get('/', 'Home::index');
+	$routes->get('/order', 'Home::order');
 });
 
 /*

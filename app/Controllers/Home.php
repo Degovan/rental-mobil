@@ -8,5 +8,9 @@ class Home extends BaseController
 	{
 		return view('dashboard');
 	}
+	public function order()
+	{
+		return view('order_sewa');
+	}
 
 }

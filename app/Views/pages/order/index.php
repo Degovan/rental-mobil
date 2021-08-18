@@ -554,8 +554,9 @@
         </table>
     </div>
 </div>
+<?= $this->endSection() ?>
 
-
+<?= $this->section('style') ?>
 <style>
     .order-wrapper {
         padding: 20px !important;
@@ -580,4 +581,14 @@
         background-color: #fff;
     }
 </style>
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 <?= $this->endSection() ?>

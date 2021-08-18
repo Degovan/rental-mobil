@@ -9,7 +9,7 @@
     <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Monsterlite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Monster admin lite design, Monster admin lite dashboard bootstrap 5 dashboard template">
     <meta name="description" content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Monster Lite Template by WrapPixel</title>
+    <title><?= $title ?? '' ?></title>
     <!-- <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" /> -->
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
@@ -18,20 +18,11 @@
     <link href="/css/style.min.css" rel="stylesheet">
     <!-- datatables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
+    <?= $this->renderSection('style') ?>
 </head>
 
 <body>
-
     <?= $this->include('layout/navbar') ?>
-
     <?= $this->include('layout/sidebar') ?>
 
     <div class="page-wrapper">
@@ -56,6 +47,7 @@
 
     <?= $this->include('layout/footer') ?>
 
+    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -67,11 +59,8 @@
     <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="/js/custom.js"></script>
-    <!--This page JavaScript -->
-    <!--flot chart-->
-    <!--    <script src="public/assets/plugins/flot/jquery.flot.js"></script>
-    <script src="public/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="public/js/pages/dashboards/dashboard1.js"></script> -->
+
+    <?= $this->renderSection('javascript') ?>
 </body>
 
 </html>

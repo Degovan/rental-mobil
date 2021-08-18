@@ -10,7 +10,6 @@ class Home extends BaseController
 	}
 	public function order()
 	{
-		return view('order_sewa');
+		return view('pages/order/index');
 	}
-
 }

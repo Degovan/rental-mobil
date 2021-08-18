@@ -32,7 +32,13 @@ $routes->setAutoRoute(true);
 // Route with login filters
 // Auto redirect to login page when user is not authenticated
 $routes->group('', ['filter' => 'login'], function ($routes) {
-	$routes->get('/', 'Home::index');
+	$routes->get('/', 'Home::index', ['as' => 'dashboard']);
+
+	$routes->group('/santri', function ($routes) {
+		$routes->get('/', 'SantriController::index', ['as' => 'santri']);
+		$routes->post('/', 'SantriController::store');
+		$routes->get('create', 'SantriController::create', ['as' => 'santri.create']);
+	});
 });
 
 /*

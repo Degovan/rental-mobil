@@ -14,9 +14,9 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <!-- Custom CSS -->
-    <link href="assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/assets/plugins/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
 
 </head>
 
@@ -48,16 +48,15 @@
 
     <?= $this->include('layout/footer') ?>
 
-    <script src="../assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
+    <script src="/js/app-style-switcher.js"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
+    <script src="/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--flot chart-->
     <script src="/assets/plugins/flot/jquery.flot.js"></script>

@@ -41,4 +41,13 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $santri = [
+		'registration_number' => 'required|numeric',
+		'fullname' => 'required',
+		'born_place' => 'required',
+		'born_date' => 'required|valid_date',
+		'domicile_block' => 'required',
+		'educational_institute' => 'required'
+	];
 }

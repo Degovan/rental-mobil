@@ -35,6 +35,12 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 	$routes->get('/dashboard', 'Home::index');
 	$routes->get('/orders', 'OrderController::index');
 	$routes->get('/cars', 'CarController::index');
+	// Santri Routes
+	$routes->group('/santri', function ($routes) {
+		$routes->get('/', 'SantriController::index', ['as' => 'santri']);
+		$routes->post('/', 'SantriController::store');
+		$routes->get('create', 'SantriController::create', ['as' => 'santri.create']);
+	});
 });
 
 /*

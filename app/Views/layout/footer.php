@@ -1,3 +1,3 @@
 <footer class="footer text-center">
-    © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+    © 2021 Rental Mobil Pondok by <a href="https://www.degovan.com/" target="_blank">degovan.com</a>
 </footer>

@@ -15,7 +15,7 @@ class SantriController extends BaseController
 			'header' => 'Data Santri'
 		];
 
-		return view('pages/santri/index', $data);
+		return view('admin/santri/index', $data);
 	}
 
 	public function create()
@@ -26,7 +26,7 @@ class SantriController extends BaseController
 			'errors' => session()->getFlashdata('errors')
 		];
 
-		return view('pages/santri/create', $data);
+		return view('admin/santri/create', $data);
 	}
 
 	public function store()
@@ -49,7 +49,7 @@ class SantriController extends BaseController
 	{
 		return DataTables::use('santri')
 			->addColumn('action', function ($santri) {
-				return view('pages/santri/action_dt', compact('santri'));
+				return view('admin/santri/action_dt', compact('santri'));
 			})
 			->rawColumns(['action'])
 			->make();

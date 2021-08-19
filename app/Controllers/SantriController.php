@@ -46,6 +46,35 @@ class SantriController extends BaseController
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
 	}
 
+	public function edit($id)
+	{
+		$data = [
+			'title' => 'Edit Data Santri',
+			'header' => 'Edit Data Santri',
+			'santri' => model(SantriModel::class)->findOrFail($id),
+		];
+
+		return view('/admin/santri/edit', $data);
+	}
+
+	public function update($id)
+	{
+		$model = new SantriModel();
+		$santri = $model->findOrFail($id);
+		$data = $this->request->getPost();
+
+		if ($this->validation->run($data, 'santri')) {
+
+			if ($model->update($santri->id, $data)) {
+				return redirect()->back()->with('message', 'Berhasil menyimpan data santri');
+			}
+
+			return redirect()->back()->with('error', 'Gagal menyimpan data santri');
+		}
+
+		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+	}
+
 	public function excel()
 	{
 		if (!$this->validate([

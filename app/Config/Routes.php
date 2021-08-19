@@ -41,6 +41,8 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->get('/', 'SantriController::index', ['as' => 'santri']);
 		$routes->post('/', 'SantriController::store');
 		$routes->get('create', 'SantriController::create', ['as' => 'santri.create']);
+		$routes->get('edit/(:num)', 'SantriController::edit/$1', ['as' => 'santri.edit']);
+		$routes->post('edit/(:num)', 'SantriController::update/$1');
 		$routes->post('excel', 'SantriController::excel', ['as' => 'santri.excel']);
 		$routes->delete('(:num)', 'SantriController::destroy/$1', ['as' => 'santri.destroy']);
 		$routes->get('datatable', 'SantriController::datatable');

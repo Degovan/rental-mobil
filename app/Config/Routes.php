@@ -36,9 +36,10 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 	$routes->get('/dashboard', 'Home::index', ['as' => 'dashboard']);
 	$routes->get('/orders', 'OrderController::index');
 
-	$routes->group('/cars', function($routes){
-		$routes->get('/', 'CarController::index', ['as' => 'cars']);
-		$routes->post('/', 'CarController::store');
+	$routes->group('/orders', function($routes){
+		$routes->get('/', 'OrderController::index', ['as' => 'orders']);
+		$routes->get('create', 'OrderController::create', ['as' => 'order.create']);
+		$routes->post('/', 'OrderController::store');
 	});
 	// Santri Routes
 	$routes->group('/santri', function ($routes) {

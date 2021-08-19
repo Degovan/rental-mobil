@@ -19,6 +19,9 @@
     <!-- datatables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
     <?= $this->renderSection('style') ?>
+
+    <!-- jquery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
@@ -60,6 +63,8 @@
     <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="/js/custom.js"></script>
+    <!-- Jquery UI js -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <?= $this->include('components/sweetalert') ?>
     <?= $this->renderSection('javascript') ?>

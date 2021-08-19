@@ -14,4 +14,12 @@ class OrderController extends BaseController
 		];
 		return view('admin/orders/index', $data);
 	}
+	public function create()
+	{
+		$data = [
+			'title' => 'Tambah Order',
+			'header' => 'Tambah Order'
+		];
+		echo view('admin/orders/create', $data);
+	}
 }

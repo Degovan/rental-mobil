@@ -9,9 +9,7 @@
 <?= $this->section('content') ?>
 <div class="row">
     <div class="col-md-5">
-    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
-        Tambah
-    </button>
+    <a href="<?= route_to('order.create');?>" class="btn btn-primary mb-3">Tambah</a>
     <!-- modal -->
     <?= $this->include('admin/orders/utilities/modal-add') ;?>
         <div class="card">

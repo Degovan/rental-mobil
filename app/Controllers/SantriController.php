@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Helpers\SantriHelper;
 use App\Models\SantriModel;
 use Irsyadulibad\DataTables\DataTables;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class SantriController extends BaseController
 {
@@ -45,6 +47,23 @@ class SantriController extends BaseController
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
 	}
 
+	public function excel()
+	{
+		if (!$this->validate([
+			'excel' => 'uploaded[excel]|ext_in[excel,xls,xlsx]'
+		])) {
+			return redirect()->back()->with('errors', $this->validation->getErrors());
+		}
+
+		$imported = SantriHelper::importExcel($this->request->getFile('excel'));
+
+		if ($imported > 0) {
+			return redirect()->back()->with('message', 'Berhasil mengimpor data santri');
+		}
+
+		return redirect()->back()->with('error', 'Gagal mengimpor data santri');
+	}
+
 	public function datatable()
 	{
 		return DataTables::use('santri')
@@ -58,7 +77,7 @@ class SantriController extends BaseController
 	public function destroy($id)
 	{
 		$santri = model(SantriModel::class)->findOrFail($id);
-		model(SantriModel::class)->delete($id);
+		model(SantriModel::class)->delete($santri->id);
 		return redirect()->back()->with('message', 'Berhasil mengapus data santri');
 	}
 }

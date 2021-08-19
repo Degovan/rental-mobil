@@ -11,6 +11,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title">Form</h5>
                 <form action="<?= route_to('santri') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="form-floating mb-3">
@@ -58,6 +59,28 @@
                     <div class="mb-3 d-flex justify-content-between">
                         <a href="<?= route_to('santri') ?>" class="btn btn-danger text-white"><i class="fa fa-arrow-left"></i> Kembali</a>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Import Excel</h5>
+
+                <form action="<?= route_to('santri.excel') ?>" method="post" enctype="multipart/form-data">
+                    <?= csrf_field() ?>
+                    <div class="form-floating mb-3">
+                        <input type="file" name="excel" id="excel" class="form-control <?= ($errors['excel'] ?? null) ? 'is-invalid' : '' ?>" accept=".xlsx,.xsl">
+                        <div class="invalid-feedback">
+                            <?= $errors['excel'] ?? '' ?>
+                        </div>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-download"></i> Import
+                        </button>
                     </div>
                 </form>
             </div>

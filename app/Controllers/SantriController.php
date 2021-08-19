@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Helpers\SantriHelper;
 use App\Models\SantriModel;
+use CodeIgniter\Format\JSONFormatter;
 use Irsyadulibad\DataTables\DataTables;
 
 class SantriController extends BaseController
@@ -44,6 +45,15 @@ class SantriController extends BaseController
 		}
 
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+	}
+
+	public function show($id)
+	{
+		$santri = model(SantriModel::class)->findOrFail($id);
+		if ($this->request->getGet('type') == 'json') {
+			$formatter = new JSONFormatter;
+			return $formatter->format($santri);
+		}
 	}
 
 	public function edit($id)

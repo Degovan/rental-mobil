@@ -36,15 +36,17 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 	$routes->get('/dashboard', 'Home::index', ['as' => 'dashboard']);
 	$routes->get('/orders', 'OrderController::index');
 
-	$routes->group('/orders', function($routes){
+	$routes->group('/orders', function ($routes) {
 		$routes->get('/', 'OrderController::index', ['as' => 'orders']);
 		$routes->get('create', 'OrderController::create', ['as' => 'order.create']);
 		$routes->post('/', 'OrderController::store');
+		$routes->post('/', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
 	});
 	// Santri Routes
 	$routes->group('/santri', function ($routes) {
 		$routes->get('/', 'SantriController::index', ['as' => 'santri']);
 		$routes->post('/', 'SantriController::store');
+		$routes->get('show/(:num)', 'SantriController::show/$1', ['as' => 'santri.show']);
 		$routes->get('create', 'SantriController::create', ['as' => 'santri.create']);
 		$routes->get('edit/(:num)', 'SantriController::edit/$1', ['as' => 'santri.edit']);
 		$routes->post('edit/(:num)', 'SantriController::update/$1');

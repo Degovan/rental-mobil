@@ -50,4 +50,8 @@ class Validation
 		'domicile_block' => 'required',
 		'educational_institute' => 'required'
 	];
+
+	public $order = [
+		''
+	];
 }

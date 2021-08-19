@@ -28,11 +28,12 @@ $routes->setAutoRoute(true);
  * Route Definitions
  * --------------------------------------------------------------------
  */
+$routes->addRedirect('/', '/dashboard');
 
 // Route with login filters
 // Auto redirect to login page when user is not authenticated
 $routes->group('', ['filter' => 'login'], function ($routes) {
-	$routes->get('/dashboard', 'Home::index');
+	$routes->get('/dashboard', 'Home::index', ['as' => 'dashboard']);
 	$routes->get('/orders', 'OrderController::index');
 	$routes->get('/cars', 'CarController::index');
 	// Santri Routes

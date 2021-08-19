@@ -10,6 +10,11 @@
     <div class="col-md-10">
         <div class="card">
             <div class="card-body">
+                <div class="d-flex justify-content-end">
+                    <a href="<?= route_to('santri.create') ?>" class="btn btn-success mb-3 text-white">
+                        <i class="fa fa-plus"></i> Tambah Data
+                    </a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="santri-table">
                         <thead>

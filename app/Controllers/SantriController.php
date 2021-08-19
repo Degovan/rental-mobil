@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Helpers\SantriHelper;
 use App\Models\SantriModel;
 use Irsyadulibad\DataTables\DataTables;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class SantriController extends BaseController
 {

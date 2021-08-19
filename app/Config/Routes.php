@@ -28,11 +28,12 @@ $routes->setAutoRoute(true);
  * Route Definitions
  * --------------------------------------------------------------------
  */
+$routes->addRedirect('/', '/dashboard');
 
 // Route with login filters
 // Auto redirect to login page when user is not authenticated
 $routes->group('', ['filter' => 'login'], function ($routes) {
-	$routes->get('/dashboard', 'Home::index');
+	$routes->get('/dashboard', 'Home::index', ['as' => 'dashboard']);
 	$routes->get('/orders', 'OrderController::index');
 
 	$routes->group('/cars', function($routes){
@@ -44,6 +45,7 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->get('/', 'SantriController::index', ['as' => 'santri']);
 		$routes->post('/', 'SantriController::store');
 		$routes->get('create', 'SantriController::create', ['as' => 'santri.create']);
+		$routes->post('excel', 'SantriController::excel', ['as' => 'santri.excel']);
 		$routes->delete('(:num)', 'SantriController::destroy/$1', ['as' => 'santri.destroy']);
 		$routes->get('datatable', 'SantriController::datatable');
 	});

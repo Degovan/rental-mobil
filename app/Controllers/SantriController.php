@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Helpers\SantriHelper;
 use App\Models\SantriModel;
 use Irsyadulibad\DataTables\DataTables;
 
@@ -15,7 +16,7 @@ class SantriController extends BaseController
 			'header' => 'Data Santri'
 		];
 
-		return view('pages/santri/index', $data);
+		return view('admin/santri/index', $data);
 	}
 
 	public function create()
@@ -26,7 +27,7 @@ class SantriController extends BaseController
 			'errors' => session()->getFlashdata('errors')
 		];
 
-		return view('pages/santri/create', $data);
+		return view('admin/santri/create', $data);
 	}
 
 	public function store()
@@ -45,11 +46,28 @@ class SantriController extends BaseController
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
 	}
 
+	public function excel()
+	{
+		if (!$this->validate([
+			'excel' => 'uploaded[excel]|ext_in[excel,xls,xlsx]'
+		])) {
+			return redirect()->back()->with('errors', $this->validation->getErrors());
+		}
+
+		$imported = SantriHelper::importExcel($this->request->getFile('excel'));
+
+		if ($imported > 0) {
+			return redirect()->back()->with('message', 'Berhasil mengimpor data santri');
+		}
+
+		return redirect()->back()->with('error', 'Gagal mengimpor data santri');
+	}
+
 	public function datatable()
 	{
 		return DataTables::use('santri')
 			->addColumn('action', function ($santri) {
-				return view('pages/santri/action_dt', compact('santri'));
+				return view('admin/santri/action_dt', compact('santri'));
 			})
 			->rawColumns(['action'])
 			->make();
@@ -58,7 +76,7 @@ class SantriController extends BaseController
 	public function destroy($id)
 	{
 		$santri = model(SantriModel::class)->findOrFail($id);
-		model(SantriModel::class)->delete($id);
+		model(SantriModel::class)->delete($santri->id);
 		return redirect()->back()->with('message', 'Berhasil mengapus data santri');
 	}
 }

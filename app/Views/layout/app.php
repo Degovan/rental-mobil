@@ -61,6 +61,7 @@
     <!--Custom JavaScript -->
     <script src="/js/custom.js"></script>
 
+    <?= $this->include('components/sweetalert') ?>
     <?= $this->renderSection('javascript') ?>
 </body>
 

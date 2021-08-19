@@ -61,43 +61,38 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Mobil</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>ELF</option>
-                        <option>APV</option>
+                    <label for="rental_car">Mobil</label>
+                    <select class="form-control" id="rental_car">
+                        <option value="ELF">ELF</option>
+                        <option value="APV">APV</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Harga Perjam</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <label for="rental_hour">Rental (jam)</label>
+                    <input type="number" name="rental_hour" id="rental_hour" class="form-control">
+                    <small>*minimal 3 jam</small>
                 </div>
 
 
                 <div class="form-floating mb-3">
-                    <input type="text" readonly name="educational_institute" id="educational_institute" class="form-control <?= ($errors['educational_institute'] ?? null) ? 'is-invalid' : '' ?>">
-                    <label for="educational_institute">Nominal</label>
+                    <input type="text" readonly name="cost" id="cost" class="form-control <?= ($errors['cost'] ?? null) ? 'is-invalid' : '' ?>">
+                    <label for="cost">Nominal</label>
                     <div class="invalid-feedback">
-                        <?= $errors['educational_institute'] ?? '' ?>
+                        <?= $errors['cost'] ?? '' ?>
                     </div>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" readonly name="educational_institute" id="educational_institute" class="form-control <?= ($errors['educational_institute'] ?? null) ? 'is-invalid' : '' ?>">
-                    <label for="educational_institute">Honor Sopir</label>
+                    <input type="text" readonly name="honour" id="honour" class="form-control <?= ($errors['honour'] ?? null) ? 'is-invalid' : '' ?>">
+                    <label for="honour">Honor Sopir</label>
                     <div class="invalid-feedback">
-                        <?= $errors['educational_institute'] ?? '' ?>
+                        <?= $errors['honour'] ?? '' ?>
                     </div>
                 </div>
 
                 <h4>Total Harga: </h4>
-                <p>Rp.40.000,00</p>
+                <p id="total">Rp.40.000,00</p>
 
             </div>
             <div class="mb-3 d-flex justify-content-between">
@@ -157,6 +152,38 @@
         },
         max: 10,
         minLength: 3
+    });
+
+    $('#rental_hour').on('keyup', function(e) {
+        const car = $('#rental_car').val().toLowerCase();
+        const input = $(this);
+        const value = parseInt(input.val());
+
+        if (value < 3 || isNaN(value)) {
+            input.addClass('is-invalid');
+            $('#cost').val('');
+            $('#honour').val('');
+            $('#total').text('0');
+            return false;
+        }
+
+        input.removeClass('is-invalid');
+        $.ajax({
+            url: '<?= route_to('order.cost') ?>',
+            method: 'post',
+            data: {
+                car: car,
+                hour: input.val()
+            },
+            dataType: 'json',
+            success: function(data) {
+                $.map(data, (value, label) => {
+                    $(`#${label}`).val(value);
+                });
+
+                $('#total').text(data.cost + data.honour);
+            }
+        });
     });
 </script>
 </script>

@@ -40,7 +40,7 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->get('/', 'OrderController::index', ['as' => 'orders']);
 		$routes->get('create', 'OrderController::create', ['as' => 'order.create']);
 		$routes->post('/', 'OrderController::store');
-		$routes->post('/', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
+		$routes->post('autocomplete', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
 		$routes->post('cost', 'OrderController::getCost', ['as' => 'order.cost']);
 	});
 	// Santri Routes

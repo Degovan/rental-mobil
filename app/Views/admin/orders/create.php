@@ -10,10 +10,16 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Form</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <form action="<?= route_to('orders') ?>" method="post">
-                    <?= csrf_field() ?>
+        <form action="<?= route_to('orders') ?>" method="post">
+            <div class="row">
+                <?= csrf_field() ?>
+                <input id="santri_id" type="hidden" name="santri_id">
+                <div class="col-md-6">
+                    <?php if ($errors['santri_id'] ?? null) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            Santri harus dipilih
+                        </div>
+                    <?php endif; ?>
                     <div class="form-floating mb-3">
                         <input type="text" name="fullname" id="fullname" class="form-control <?= ($errors['fullname'] ?? null) ? 'is-invalid' : '' ?>">
                         <label for="fullname">Nama Lengkap</label>
@@ -56,53 +62,46 @@
                             <?= $errors['educational_institute'] ?? '' ?>
                         </div>
                     </div>
-
-
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="rental_car">Mobil</label>
-                    <select class="form-control" id="rental_car">
-                        <option value="ELF">ELF</option>
-                        <option value="APV">APV</option>
-                    </select>
                 </div>
-
-                <div class="form-group">
-                    <label for="rental_hour">Rental (jam)</label>
-                    <input type="number" name="rental_hour" id="rental_hour" class="form-control">
-                    <small>*minimal 3 jam</small>
-                </div>
-
-
-                <div class="form-floating mb-3">
-                    <input type="text" readonly name="cost" id="cost" class="form-control <?= ($errors['cost'] ?? null) ? 'is-invalid' : '' ?>">
-                    <label for="cost">Nominal</label>
-                    <div class="invalid-feedback">
-                        <?= $errors['cost'] ?? '' ?>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="rental_car">Mobil</label>
+                        <select class="form-control <?= ($errors['rental_car'] ?? null) ? 'is-invalid' : '' ?>" id="rental_car" name="rental_car">
+                            <option value="ELF">ELF</option>
+                            <option value="APV">APV</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= $errors['rental_car'] ?? '' ?>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" readonly name="honour" id="honour" class="form-control <?= ($errors['honour'] ?? null) ? 'is-invalid' : '' ?>">
-                    <label for="honour">Honor Sopir</label>
-                    <div class="invalid-feedback">
-                        <?= $errors['honour'] ?? '' ?>
+                    <div class="form-group">
+                        <label for="rental_hour">Rental (jam)</label>
+                        <input type="number" name="rental_hour" id="rental_hour" class="form-control">
+                        <small>*minimal 3 jam</small>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" readonly name="cost" id="cost" class="form-control <?= ($errors['cost'] ?? null) ? 'is-invalid' : '' ?>">
+                        <label for="cost">Nominal</label>
+                        <div class="invalid-feedback">
+                            <?= $errors['cost'] ?? '' ?>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" readonly name="honour" id="honour" class="form-control <?= ($errors['honour'] ?? null) ? 'is-invalid' : '' ?>">
+                        <label for="honour">Honor Sopir</label>
+                        <div class="invalid-feedback">
+                            <?= $errors['honour'] ?? '' ?>
+                        </div>
+                    </div>
+                    <h4>Total Harga: </h4>
+                    <p id="total">Rp.40.000,00</p>
                 </div>
-
-                <h4>Total Harga: </h4>
-                <p id="total">Rp.40.000,00</p>
-
+                <div class="mb-3 d-flex justify-content-between">
+                    <a href="<?= route_to('orders') ?>" class="btn btn-danger text-white"><i class="fa fa-arrow-left"></i> Kembali</a>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                </div>
             </div>
-            <div class="mb-3 d-flex justify-content-between">
-                <a href="<?= route_to('orders') ?>" class="btn btn-danger text-white"><i class="fa fa-arrow-left"></i> Kembali</a>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-            </div>
-            </form>
-            <!-- /form -->
-            <div id="datas"></div>
-        </div>
+        </form>
     </div>
 </div>
 <?= $this->endSection() ?>
@@ -146,6 +145,8 @@
         select: function(event, ui) {
             const fullname = ui.item.label;
             $('#fullname').val(fullname);
+            $('#santri_id').val(ui.item.value);
+
 
             updateSantriForm(ui.item.value);
             return false;

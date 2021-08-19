@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Helpers\OrderHelper;
+use App\Models\OrderModel;
 use App\Models\SantriModel;
 use CodeIgniter\Format\JSONFormatter;
 
@@ -21,7 +22,8 @@ class OrderController extends BaseController
 	{
 		$data = [
 			'title' => 'Tambah Order',
-			'header' => 'Tambah Order'
+			'header' => 'Tambah Order',
+			'errors' => session()->getFlashdata('errors')
 		];
 		echo view('admin/orders/create', $data);
 	}
@@ -31,6 +33,15 @@ class OrderController extends BaseController
 		$data = $this->request->getPost();
 
 		if ($this->validation->run($data, 'order')) {
+			model(OrderModel::class)->insert([
+				'santri_id' => $data['santri_id'],
+				'car' => $data['rental_car'],
+				'price' => $data['cost'],
+				'honorer' => $data['honour'],
+				'total_price' => intval($data['cost']) + intval($data['honour'])
+			]);
+
+			return redirect()->back()->withInput()->with('message', 'Berhasil menambahkan data order');
 		}
 
 		return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());

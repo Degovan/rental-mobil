@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <h4>Total Harga: </h4>
-                    <p id="total">Rp.40.000,00</p>
+                    <p>Rp. <span id="total">0</span></p>
                 </div>
                 <div class="mb-3 d-flex justify-content-between">
                     <a href="<?= route_to('orders') ?>" class="btn btn-danger text-white"><i class="fa fa-arrow-left"></i> Kembali</a>

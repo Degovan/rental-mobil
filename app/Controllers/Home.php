@@ -11,13 +11,13 @@ class Home extends BaseController
 		$db      = \Config\Database::connect();
 
 		$santri = $db->table('santri');
-		// $order  = $db->table('order');
+		$order  = $db->table('order');
 
 		$data = [
 			'title' 		=> 'Dashboard', 
 			'header' 		=> 'Dashboard',
 			'count_santri' 	=> $santri->countAll(),
-			// 'count_order' 	=> $order->countAll(),
+			'count_order' 	=> $order->countAll(),
 		];
 
 		echo view('dashboard', $data);

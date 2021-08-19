@@ -28,7 +28,7 @@
                 <h4 class="card-title">Data Order</h4>
                 <div class="text-end">
                     <h2 class="font-light mb-0">
-                    500
+                    <?= $count_order?>
                 </h2>
                     <span class="text-muted">Total Order</span>
                 </div>
@@ -45,17 +45,18 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Data Santri</h4>
+                <h4 class="card-title">Data Order</h4>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="santri-table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>No Induk</th>
-                                <th>Nama Lengkap</th>
-                                <th>Tempat Lahir</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Aksi</th>
+                                <th>Santri</th>
+                                <th>Mobil</th>
+                                <th>Harga Sewa</th>
+                                <th>Honor Sopir</th>
+                                <th>Total</th>
+                                <!-- <th>Aksi</th> -->
                             </tr>
                         </thead>
                     </table>
@@ -79,7 +80,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: '/santri/datatable'
+                url: '/orders/datatable'
             },
             columns: [{
                     render: function(data, type, row, meta) {
@@ -87,25 +88,29 @@
                     }
                 },
                 {
-                    data: 'registration_number',
-                    name: 'No Induk'
+                    data: 'santri',
+                    name: 'Santri'
                 },
                 {
-                    data: 'fullname',
-                    name: 'Nama Lengkap'
+                    data: 'car',
+                    name: 'Mobil'
                 },
                 {
-                    data: 'born_place',
-                    name: 'Tempat Lahir'
+                    data: 'price',
+                    name: 'Harga Sewa'
                 },
                 {
-                    data: 'born_date',
-                    name: 'Tanggal Lahir'
+                    data: 'honorer',
+                    name: 'Honor Sopir'
                 },
                 {
-                    data: 'action',
-                    name: 'aksi'
-                }
+                    data: 'total_price',
+                    name: 'Total'
+                },
+                // {
+                //     data: 'action',
+                //     name: 'aksi'
+                // }
             ]
         });
     });

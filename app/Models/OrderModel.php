@@ -11,7 +11,7 @@ class OrderModel extends Model
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	protected $returnType           = 'object';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
@@ -41,4 +41,15 @@ class OrderModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function findOrFail($id)
+	{
+		$order = $this->find($id);
+
+		if (!$order) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		} else {
+			return $order;
+		}
+	}
 }

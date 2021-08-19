@@ -42,6 +42,8 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->post('/', 'OrderController::store');
 		$routes->post('autocomplete', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
 		$routes->post('cost', 'OrderController::getCost', ['as' => 'order.cost']);
+		$routes->delete('(:num)', 'OrderController::destroy/$1', ['as' => 'order.destroy']);
+		$routes->get('datatable', 'OrderController::datatable');
 	});
 	// Santri Routes
 	$routes->group('/santri', function ($routes) {

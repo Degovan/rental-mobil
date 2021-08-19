@@ -35,7 +35,11 @@ $routes->addRedirect('/', '/dashboard');
 $routes->group('', ['filter' => 'login'], function ($routes) {
 	$routes->get('/dashboard', 'Home::index', ['as' => 'dashboard']);
 	$routes->get('/orders', 'OrderController::index');
-	$routes->get('/cars', 'CarController::index');
+
+	$routes->group('/cars', function($routes){
+		$routes->get('/', 'CarController::index', ['as' => 'cars']);
+		$routes->post('/', 'CarController::store');
+	});
 	// Santri Routes
 	$routes->group('/santri', function ($routes) {
 		$routes->get('/', 'SantriController::index', ['as' => 'santri']);

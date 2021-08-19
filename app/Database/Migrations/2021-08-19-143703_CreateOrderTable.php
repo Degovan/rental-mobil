@@ -19,6 +19,7 @@ class CreateOrderTable extends Migration
 			],
 			'santri_id' => [
 				'type' => 'int',
+				'constraint' => 11,
 				'unsigned' => TRUE
 			],
 			'car' 		=> [
@@ -57,6 +58,6 @@ class CreateOrderTable extends Migration
 
 	public function down()
 	{
-		$this->forge->createTable('order');
+		$this->forge->dropTable('order');
 	}
 }

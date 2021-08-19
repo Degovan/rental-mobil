@@ -6,7 +6,11 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		$data['thumb'] = 'Dashboard';
+		$data = [
+			'title' => 'Dashboard', 
+			'header' => 'Dashboard'
+		];
+
 		echo view('dashboard', $data);
 	}
 }

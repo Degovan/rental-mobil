@@ -9,28 +9,30 @@
         </button>
       </div>
       <div class="modal-body">
+        <form action="" method="POST" enctype="multipart/form-data" id="formAdd">
         <div class="form-group row">
           <label for="" class="col-md-2">Nama</label>
           <div class="col-md-10">
-            <input type="text" class="form-control ">
+            <input type="text" class="form-control" name="title" id="title" value="">
           </div>
         </div>
         <div class="form-group row">
           <label for="" class="col-md-2">Photo</label>
           <div class="col-md-10">
-            <input type="file" class="form-control ">
+            <input type="file" class="form-control" id="photo" value=""  accept="image/*">
           </div>
         </div>
         <div class="form-group row">
           <label for="" class="col-md-2">Harga</label>
           <div class="col-md-10">
-            <input type="text" class="form-control" id="price">
+            <input type="text" class="form-control" id="price" value="">
           </div>
         </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary save">Simpan</button>
       </div>
     </div>
   </div>

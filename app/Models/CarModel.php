@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Car extends Model
+class CarModel extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'cars';
+	protected $table                = 'car';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;

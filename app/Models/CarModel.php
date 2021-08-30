@@ -41,4 +41,15 @@ class CarModel extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+	public function findOrFail($id)
+	{
+		$car = $this->find($id);
+
+		if (!$car) {
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		} else {
+			return $car;
+		}
+	}
 }

@@ -57,6 +57,16 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->delete('(:num)', 'SantriController::destroy/$1', ['as' => 'santri.destroy']);
 		$routes->get('datatable', 'SantriController::datatable');
 	});
+	// Car Routes
+	$routes->group('/car', function ($routes) {
+		$routes->get('/', 'CarController::index', ['as' => 'car']);
+		$routes->get('create', 'CarController::create', ['as' => 'car.create']);
+		$routes->post('/', 'CarController::store');
+		$routes->get('edit/(:num)', 'CarController::edit/$1', ['as' => 'car.edit']);
+		$routes->post('edit/(:num)', 'CarController::update/$1');
+		$routes->delete('(:num)', 'CarController::destroy/$1', ['as' => 'car.destroy']);
+		$routes->get('datatable', 'CarController::datatable', ['as' => 'car.datatable']);
+	});
 });
 
 /*

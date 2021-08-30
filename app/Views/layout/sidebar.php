@@ -15,6 +15,11 @@
                         <li class="sidebar-item"><a href="<?= route_to('santri.create') ?>" class="sidebar-link"><i class="me-3 fa fa-plus"></i> Tambah</a></li>
                     </ul>
                 </li>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="me-3 fa fa-car"></i><span class="hide-menu">Data Mobil </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a href="<?= route_to('car') ?>" class="sidebar-link"><i class="me-3 fa fa-list"></i> Daftar Mobil</a></li>
+                    </ul>
+                </li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= route_to('logout') ?>" aria-expanded="false"><i class="me-3 fa fa-sign-out-alt" aria-hidden="true"></i><span class="hide-menu">Logout</span></a></li>
             </ul>
 

@@ -64,26 +64,32 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="rental_car">Mobil</label>
-                        <select class="form-control <?= ($errors['rental_car'] ?? null) ? 'is-invalid' : '' ?>" id="rental_car" name="rental_car">
-                            <option value="ELF">ELF</option>
-                            <option value="APV">APV</option>
+                    <div class="form-floating mb-3">
+                        <select name="car_id" id="car_id" class="form-control <?= ($errors['car_id'] ?? null) ? 'is-invalid' : '' ?>">
+                            <option value="">-- pilih mobil --</option>
+                            <?php foreach ($cars as $car) : ?>
+                                <option value="<?= $car->id ?>"><?= $car->name ?></option>
+                            <?php endforeach; ?>
                         </select>
+                        <label for="car_id">Mobil</label>
                         <div class="invalid-feedback">
-                            <?= $errors['rental_car'] ?? '' ?>
+                            <?= $errors['car_id'] ?? '' ?>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="rental_hour">Rental (jam)</label>
-                        <input type="number" name="rental_hour" id="rental_hour" class="form-control">
-                        <small>*minimal 3 jam</small>
+                    <div class="form-floating mb-3">
+                        <select name="hours" id="hours" class="form-control <?= ($errors['hours'] ?? null) ? 'is-invalid' : '' ?>">
+                            <option value="">-- pilih waktu --</option>
+                        </select>
+                        <label for="hours">Waktu (jam)</label>
+                        <div class="invalid-feedback">
+                            <?= $errors['hours'] ?? '' ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" readonly name="cost" id="cost" class="form-control <?= ($errors['cost'] ?? null) ? 'is-invalid' : '' ?>">
-                        <label for="cost">Nominal</label>
+                        <input type="text" readonly name="price" id="price" class="form-control <?= ($errors['price'] ?? null) ? 'is-invalid' : '' ?>">
+                        <label for="price">Nominal</label>
                         <div class="invalid-feedback">
-                            <?= $errors['cost'] ?? '' ?>
+                            <?= $errors['price'] ?? '' ?>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
@@ -155,37 +161,64 @@
         minLength: 3
     });
 
-    $('#rental_hour').on('keyup', function(e) {
-        const car = $('#rental_car').val().toLowerCase();
-        const input = $(this);
-        const value = parseInt(input.val());
+    function updateHoursChoices(hours) {
+        $('#hours').html('');
 
-        if (value < 3 || isNaN(value)) {
-            input.addClass('is-invalid');
-            $('#cost').val('');
-            $('#honour').val('');
-            $('#total').text('0');
-            return false;
-        }
+        if (typeof(hours) == null) return true;
 
-        input.removeClass('is-invalid');
+        $.each(hours, (i, hour) => {
+            $('#hours').append(`<option value="${hour}">${hour} jam</option>`);
+        });
+
+        return $('#hours').trigger('change');
+    }
+
+    $('#car_id').on('change', function(e) {
         $.ajax({
-            url: '<?= route_to('order.cost') ?>',
             method: 'post',
+            url: '<?= route_to('order.hours') ?>',
             data: {
-                car: car,
-                hour: input.val()
+                car_id: $('#car_id').val()
             },
             dataType: 'json',
             success: function(data) {
-                $.map(data, (value, label) => {
-                    $(`#${label}`).val(value);
-                });
+                if (data.status == 'success') {
+                    return updateHoursChoices(data.hours);
+                }
 
-                $('#total').text(data.cost + data.honour);
+                return updateHoursChoices(null);
             }
         });
     });
-</script>
+
+    function sumTotalPrice(data) {
+        const cost = parseInt(data.price);
+        const honour = parseInt(data.honour);
+
+        return cost + honour;
+    }
+
+    $('#hours').on('change', function() {
+        $.ajax({
+            method: 'post',
+            url: '<?= route_to('order.cost') ?>',
+            data: {
+                car_id: $('#car_id').val(),
+                hours: $('#hours').val()
+            },
+            dataType: 'json',
+            success: function(price) {
+                if (price.status == 'success') {
+                    $('#price').val(price.data.price);
+                    $('#honour').val(price.data.honour);
+                    $('#total').text(sumTotalPrice(price.data));
+                } else {
+                    $('#price').val('');
+                    $('#honour').val('');
+                    $('#total').text('0');
+                }
+            }
+        });
+    });
 </script>
 <?= $this->endSection(); ?>

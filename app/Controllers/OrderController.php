@@ -4,10 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Helpers\OrderHelper;
+use App\Models\CarModel;
 use App\Models\OrderModel;
+use App\Models\PriceModel;
 use App\Models\SantriModel;
 use CodeIgniter\Format\JSONFormatter;
 use Irsyadulibad\DataTables\DataTables;
+use PhpOffice\PhpSpreadsheet\Calculation\Financial\Securities\Price;
 
 class OrderController extends BaseController
 {
@@ -24,6 +27,7 @@ class OrderController extends BaseController
 		$data = [
 			'title' => 'Tambah Order',
 			'header' => 'Tambah Order',
+			'cars' => model(CarModel::class)->findAll(),
 			'errors' => session()->getFlashdata('errors')
 		];
 		echo view('admin/orders/create', $data);
@@ -34,12 +38,18 @@ class OrderController extends BaseController
 		$data = $this->request->getPost();
 
 		if ($this->validation->run($data, 'order')) {
+			$car = model(CarModel::class)->find($data['car_id']);
+			$price = model(PriceModel::class)
+				->where('car_id', $car->id)
+				->where('hours', $data['hours'])
+				->first();
+
 			model(OrderModel::class)->insert([
 				'santri_id' => $data['santri_id'],
-				'car' => $data['rental_car'],
-				'price' => $data['cost'],
-				'honorer' => $data['honour'],
-				'total_price' => intval($data['cost']) + intval($data['honour'])
+				'car' => $car->name,
+				'price' => $price->price,
+				'honorer' => $price->honour,
+				'total_price' => (int) $price->price + (int) $price->honour
 			]);
 
 			return redirect()->back()->withInput()->with('message', 'Berhasil menambahkan data order');
@@ -64,14 +74,49 @@ class OrderController extends BaseController
 		return $formatter->format($santris);
 	}
 
+	public function getHours()
+	{
+		$car_id = $this->request->getPost('car_id');
+		$prices = model(PriceModel::class)->where('car_id', $car_id)->findAll();
+
+		if (!$prices) {
+			return json_encode([
+				'status' => 'error',
+				'message' => "Hours with car id {$car_id} not found"
+			]);
+		}
+
+		return json_encode([
+			'status' => 'success',
+			'hours' => array_map(function ($price) {
+				return $price->hours;
+			}, $prices)
+		]);
+	}
+
 	public function getCost()
 	{
-		$car = $this->request->getPost('car');
-		$hour = $this->request->getPost('hour');
+		$car_id = $this->request->getPost('car_id');
+		$hours = $this->request->getPost('hours');
+		$price = model(PriceModel::class)
+			->where('car_id', $car_id)
+			->where('hours', $hours)
+			->first();
 
-		$cost = OrderHelper::rentalCar(strtoupper($car), intval($hour));
-		$formatter = new JSONFormatter;
-		return $formatter->format($cost);
+		if (!$price) {
+			return json_encode([
+				'status' => 'error',
+				'message' => "Hours with car id {$car_id} and price hours ${hours} not found"
+			]);
+		}
+
+		return json_encode([
+			'status' => 'success',
+			'data' => [
+				'price' => $price->price,
+				'honour' => $price->honour
+			]
+		]);
 	}
 
 	public function datatable()

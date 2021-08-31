@@ -41,6 +41,7 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->get('create', 'OrderController::create', ['as' => 'order.create']);
 		$routes->post('/', 'OrderController::store');
 		$routes->post('autocomplete', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
+		$routes->post('hours', 'OrderController::getHours', ['as' => 'order.hours']);
 		$routes->post('cost', 'OrderController::getCost', ['as' => 'order.cost']);
 		$routes->delete('(:num)', 'OrderController::destroy/$1', ['as' => 'order.destroy']);
 		$routes->get('datatable', 'OrderController::datatable');

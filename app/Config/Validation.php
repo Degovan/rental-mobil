@@ -53,9 +53,8 @@ class Validation
 
 	public $order = [
 		'santri_id' => 'required|numeric|is_not_unique[santri.id]',
-		'rental_car' => 'required|in_list[APV,ELF]',
-		'cost' => 'required|numeric',
-		'honour' => 'required|numeric'
+		'car_id' => 'required|numeric|is_not_unique[cars.id]',
+		'hours' => 'required|numeric|is_not_unique[prices.hours]'
 	];
 
 	public $price = [

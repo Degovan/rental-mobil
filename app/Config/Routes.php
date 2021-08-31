@@ -67,6 +67,17 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->delete('(:num)', 'CarController::destroy/$1', ['as' => 'car.destroy']);
 		$routes->get('datatable', 'CarController::datatable', ['as' => 'car.datatable']);
 	});
+
+	// Price Routes
+	$routes->group('/price', function ($routes) {
+		$routes->get('/', 'PriceController::index', ['as' => 'price']);
+		$routes->get('create', 'PriceController::create', ['as' => 'price.create']);
+		$routes->post('/', 'PriceController::store');
+		$routes->get('edit/(:num)', 'PriceController::edit/$1', ['as' => 'price.edit']);
+		$routes->post('edit/(:num)', 'PriceController::update/$1');
+		$routes->delete('(:num)', 'PriceController::destroy/$1', ['as' => 'price.destroy']);
+		$routes->get('datatable', 'PriceController::datatable', ['as' => 'price.datatable']);
+	});
 });
 
 /*

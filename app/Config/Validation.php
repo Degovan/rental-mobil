@@ -57,4 +57,11 @@ class Validation
 		'cost' => 'required|numeric',
 		'honour' => 'required|numeric'
 	];
+
+	public $price = [
+		'car_id' => 'required|numeric|is_not_unique[cars.id]',
+		'hours' => 'required|numeric',
+		'price' => 'required|numeric',
+		'honour' => 'required|numeric'
+	];
 }

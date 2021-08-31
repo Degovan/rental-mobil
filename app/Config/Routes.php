@@ -41,6 +41,7 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->get('create', 'OrderController::create', ['as' => 'order.create']);
 		$routes->post('/', 'OrderController::store');
 		$routes->post('autocomplete', 'OrderController::autocomplete', ['as' => 'order.autocomplete']);
+		$routes->post('hours', 'OrderController::getHours', ['as' => 'order.hours']);
 		$routes->post('cost', 'OrderController::getCost', ['as' => 'order.cost']);
 		$routes->delete('(:num)', 'OrderController::destroy/$1', ['as' => 'order.destroy']);
 		$routes->get('datatable', 'OrderController::datatable');
@@ -56,6 +57,27 @@ $routes->group('', ['filter' => 'login'], function ($routes) {
 		$routes->post('excel', 'SantriController::excel', ['as' => 'santri.excel']);
 		$routes->delete('(:num)', 'SantriController::destroy/$1', ['as' => 'santri.destroy']);
 		$routes->get('datatable', 'SantriController::datatable');
+	});
+	// Car Routes
+	$routes->group('/car', function ($routes) {
+		$routes->get('/', 'CarController::index', ['as' => 'car']);
+		$routes->get('create', 'CarController::create', ['as' => 'car.create']);
+		$routes->post('/', 'CarController::store');
+		$routes->get('edit/(:num)', 'CarController::edit/$1', ['as' => 'car.edit']);
+		$routes->post('edit/(:num)', 'CarController::update/$1');
+		$routes->delete('(:num)', 'CarController::destroy/$1', ['as' => 'car.destroy']);
+		$routes->get('datatable', 'CarController::datatable', ['as' => 'car.datatable']);
+	});
+
+	// Price Routes
+	$routes->group('/price', function ($routes) {
+		$routes->get('/', 'PriceController::index', ['as' => 'price']);
+		$routes->get('create', 'PriceController::create', ['as' => 'price.create']);
+		$routes->post('/', 'PriceController::store');
+		$routes->get('edit/(:num)', 'PriceController::edit/$1', ['as' => 'price.edit']);
+		$routes->post('edit/(:num)', 'PriceController::update/$1');
+		$routes->delete('(:num)', 'PriceController::destroy/$1', ['as' => 'price.destroy']);
+		$routes->get('datatable', 'PriceController::datatable', ['as' => 'price.datatable']);
 	});
 });
 
